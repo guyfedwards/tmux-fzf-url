@@ -8,7 +8,7 @@ require 'shellwords'
 
 def executable(*commands)
   commands.find do |c|
-    `command -v #{c.split.first}`.empty?.!
+    `/bin/sh -c 'command -v #{c.split.first}'`.empty?.!
   end
 end
 
