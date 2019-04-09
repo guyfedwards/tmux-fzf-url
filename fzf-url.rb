@@ -52,14 +52,10 @@ exit if selected.length < 2
 
 if selected.first == 'ctrl-y'
   # https://superuser.com/questions/288320/whats-like-osxs-pbcopy-for-linux
-  copier = executable('reattach-to-user-namespace pbcopy',
-                      'pbcopy',
-                      'xsel --clipboard --input',
+  copier = executable('wl-copy',
                       'xclip -selection clipboard')
   halt 'No command to control clipboard with' unless copier
-  with('reattach-to-user-namespace pbcopy') do
-    print selected.drop(1).join($RS).strip
-  end
+  system(copier, selected.drop(1).join($RS).strip)
   halt 'Copied to clipboard'
 end
 
